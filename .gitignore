@@ -22,5 +22,3 @@ DerivedData
 *.dSYM.zip
 *.xcuserstate
 .swiftpm
-LinuxMain.swift
-XCTestManifests.swift
