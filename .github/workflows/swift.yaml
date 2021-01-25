@@ -16,7 +16,7 @@ on:
 
 jobs:
   format:
-    name: Check swiftformat
+    name: Check SwiftFormat
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -25,8 +25,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install swiftformat
-        run: brew install swiftformat
+      - name: Install SwiftFormat
+        uses: Cyberbeni/install-swift-tool@v2
+        with:
+          url: https://github.com/nicklockwood/SwiftFormat
 
       - name: Format Swift code
         run: swiftformat --verbose .
