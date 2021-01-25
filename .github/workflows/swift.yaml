@@ -44,7 +44,7 @@ jobs:
       matrix:
         os:
           - macos-latest
-          # - ubuntu-latest # Re-enable after removing dependency on Network
+          - ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
