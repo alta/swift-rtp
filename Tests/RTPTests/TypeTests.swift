@@ -1,9 +1,8 @@
-import Network
 import XCTest
 
 @testable import RTP
 
-class RTPTests: XCTestCase {
+class TypeTests: XCTestCase {
 	func testMemorySizes() {
 		XCTAssertEqual(MemoryLayout<RTP.PayloadType>.size, 1)
 		XCTAssertEqual(MemoryLayout<RTP.SourceID>.size, 4)
@@ -38,19 +37,5 @@ class RTPTests: XCTestCase {
 		XCTAssertEqual(packet.sequenceNumber, 123)
 		XCTAssertEqual(packet.timestamp, 1)
 		XCTAssertEqual(packet.ssrc, 0x00FF_FFFF)
-	}
-
-	func testConnectionStop() {
-		let conn = RTP.Connection(host: "localhost", port: 12345) { _ in }
-		XCTAssertEqual(conn.conn.state, .setup)
-		conn.start()
-		sleep(1)
-		XCTAssertEqual(conn.conn.state, .ready)
-		conn.stop()
-		sleep(1)
-		XCTAssertEqual(conn.conn.state, .cancelled)
-		conn.conn.restart()
-		sleep(1)
-		XCTAssertEqual(conn.conn.state, .cancelled) // NWConnection instances cannot be restarted once cancelled
 	}
 }
