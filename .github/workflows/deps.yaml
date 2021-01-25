@@ -2,7 +2,7 @@ name: Dependencies
 
 on:
   schedule:
-    - cron: "11 13 1 * *" # 13:11 UTC every 1st of the month
+    - cron: "11 13 * * 1" # 13:11 UTC every Monday
 
 env:
   GITHUB_TOKEN: ${{ secrets.ALTACI_RW_GITHUB_ACCESS_TOKEN }}
@@ -19,7 +19,7 @@ jobs:
           submodules: recursive
 
       - name: Update Swift packages
-        run: make packages-update
+        run: swift package update
 
       - name: Create a pull request
         run: |
