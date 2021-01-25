@@ -1,0 +1,33 @@
+name: Dependencies
+
+on:
+  schedule:
+    - cron: "11 13 1 * *" # 13:11 UTC every 1st of the month
+
+env:
+  GITHUB_TOKEN: ${{ secrets.ALTACI_RW_GITHUB_ACCESS_TOKEN }}
+
+jobs:
+  update-swift-packages:
+    name: Update Swift packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          submodules: recursive
+
+      - name: Update Swift packages
+        run: make packages-update
+
+      - name: Create a pull request
+        run: |
+          git diff --exit-code HEAD ||
+          (
+            git config --global user.email ci@alta.software &&
+            git config --global user.name altaci &&
+            git checkout -b "deps/$(date -u '+%Y-%m-%dT%H.%M.%SZ')/swift-packages" &&
+            git add . && git commit -m 'deps: update Swift packages' &&
+            hub pull-request --push --base main --labels swift,dependencies -m 'deps: update Swift packages'
+          )

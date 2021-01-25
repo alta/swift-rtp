@@ -1,0 +1,48 @@
+name: Swift
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/swift.yaml"
+      - "**.swift"
+      - "**/Package.resolved"
+  pull_request:
+    paths:
+      - ".github/workflows/swift.yaml"
+      - "**.swift"
+      - "**/Package.resolved"
+
+jobs:
+  format:
+    name: Check swiftformat
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Format Swift code
+        run: swiftformat --verbose .
+
+      - name: Verify formatted code is unchanged
+        run: git diff --exit-code HEAD -w -G'(^[^# /])|(^#\w)|(^\s+[^#/])' # Ignore whitespace and comments
+
+  test:
+    name: Test Swift packages
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Run tests
+        run: swift test

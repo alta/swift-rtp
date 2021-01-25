@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"eamodio.gitlens",
+		"eriklynd.json-tools",
+		"foxundermoon.shell-format",
+		"stkb.rewrap",
+		"vknabel.vscode-swiftformat",
+		"xaver.clang-format",
+	]
+}

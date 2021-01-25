@@ -1,0 +1,6 @@
+--indent tab
+--exclude **/.build
+--exclude **/.git
+--exclude **/.github
+--exclude **/.swiftpm
+--exclude **/.vscode
