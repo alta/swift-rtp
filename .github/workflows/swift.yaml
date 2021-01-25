@@ -44,5 +44,8 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Generate Linux test files
+        run: swift test --generate-linuxmain
+
       - name: Run tests
         run: swift test
