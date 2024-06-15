@@ -11,7 +11,7 @@ let package = Package(
 		.library(
 			name: "RTP",
 			targets: ["RTP"]
-		),
+		)
 	],
 	dependencies: [],
 	targets: [

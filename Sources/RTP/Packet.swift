@@ -30,7 +30,7 @@ public struct Packet {
 	public let padding: UInt8
 
 	var payloadWithoutPadding: Data {
-		payload[0 ..< payload.count - Int(padding)]
+		payload[0..<payload.count - Int(padding)]
 	}
 
 	var encodedSize: Int {
@@ -81,9 +81,7 @@ public struct Packet {
 		}
 		let hasPadding = (data[0] & Self.paddingMask) != 0
 		let hasExtension = (data[0] & Self.extensionMask) != 0
-		let sizeWithPaddingAndExtension = Self.headerSize +
-			(hasPadding ? 1 : 0) +
-			(hasExtension ? Extension.headerSize : 0)
+		let sizeWithPaddingAndExtension = Self.headerSize + (hasPadding ? 1 : 0) + (hasExtension ? Extension.headerSize : 0)
 
 		// Parse second octet
 		marker = (data[Self.markerOffset] & Self.markerMask) != 0
@@ -106,10 +104,11 @@ public struct Packet {
 
 		// Parse optional CSRCs in octets 13+
 		if csrcCount > 0 {
-			csrcs = (0 ..< csrcCount).map {
+			csrcs = (0..<csrcCount).map {
 				data.big(at: Self.csrcOffset + $0)
 			}
-		} else {
+		}
+		else {
 			csrcs = nil
 		}
 
@@ -130,14 +129,10 @@ public struct Packet {
 		var data = Data(capacity: encodedSize)
 
 		// Encode first octect (version, padding, extension)
-		data.append(contentsOf: [(Self.version << 6 & Self.versionMask) |
-				(padding > 0 ? Self.paddingMask : 0) |
-				(`extension` != nil ? Self.extensionMask : 0) |
-				(UInt8(csrcs?.count ?? 0) & Self.csrcCountMask)])
+		data.append(contentsOf: [(Self.version << 6 & Self.versionMask) | (padding > 0 ? Self.paddingMask : 0) | (`extension` != nil ? Self.extensionMask : 0) | (UInt8(csrcs?.count ?? 0) & Self.csrcCountMask)])
 
 		// Encode second octet
-		data.append(contentsOf: [(marker ? Self.markerMask : 0) |
-				(payloadType.rawValue & Self.payloadTypeMask)])
+		data.append(contentsOf: [(marker ? Self.markerMask : 0) | (payloadType.rawValue & Self.payloadTypeMask)])
 
 		// Encode sequence number
 		data.append(contentsOf: [UInt8(sequenceNumber >> 8 & 0xFF), UInt8(sequenceNumber & 0xFF)])
@@ -150,7 +145,7 @@ public struct Packet {
 
 		// Encode CSRCs
 		if let csrcs = csrcs {
-			for i in 0 ..< csrcs.count {
+			for i in 0..<csrcs.count {
 				data.append(contentsOf: [UInt8(csrcs[i] >> 24 & 0xFF), UInt8(csrcs[i] >> 16 & 0xFF), UInt8(csrcs[i] >> 8 & 0xFF), UInt8(csrcs[i] & 0xFF)])
 			}
 		}
@@ -203,7 +198,7 @@ public struct Extension {
 			throw EncodingError.extensionDataTooSmall(size)
 		}
 
-		payload = data[Self.headerSize ..< size]
+		payload = data[Self.headerSize..<size]
 	}
 }
 

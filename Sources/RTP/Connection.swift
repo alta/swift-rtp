@@ -50,14 +50,16 @@
 				if let error = error {
 					print("Error receiving UDP packet: \(error)")
 					return
-				} else if let data = data {
+				}
+				else if let data = data {
 					// print("⬇️ Received UDP packet of size: \(data.count)")
 
 					do {
 						let packet = try Packet(from: data)
 						// print("🅿️ Parsed RTP packet: \(packet)")
 						self?.receiverBlock(packet)
-					} catch {
+					}
+					catch {
 						print("Error handling RTP: \(error)")
 						return
 					}
