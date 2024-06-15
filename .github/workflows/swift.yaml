@@ -23,10 +23,9 @@ jobs:
           submodules: recursive
 
       - name: Install swift-format
-        run: /home/linuxbrew/.linuxbrew/bin/brew install swift-format
-        # uses: Cyberbeni/install-swift-tool@v2
-        # with:
-        #   url: https://github.com/apple/swift-format
+        uses: Cyberbeni/install-swift-tool@v2
+        with:
+          url: https://github.com/apple/swift-format
 
       - name: Format Swift code
         run: swift-format -r -i ./
