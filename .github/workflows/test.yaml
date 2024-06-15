@@ -19,8 +19,13 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 10
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
