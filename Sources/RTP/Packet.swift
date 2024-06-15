@@ -1,7 +1,7 @@
 import Foundation
 
 // Packet represents an individual RTP packet.
-public struct Packet {
+public struct Packet: Sendable {
 	static let version: UInt8 = 2
 	static let versionMask: UInt8 = 0b1100_0000
 	static let paddingMask: UInt8 = 0b0010_0000
@@ -172,7 +172,7 @@ public struct Packet {
 }
 
 // Extension represents an RTP extension.
-public struct Extension {
+public struct Extension: Sendable {
 	public typealias ProfileID = UInt16
 
 	static let headerSize = 4

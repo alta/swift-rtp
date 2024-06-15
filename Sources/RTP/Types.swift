@@ -10,7 +10,7 @@ public enum EncodingError: Error {
 	case tooManyCSRCs(_ count: Int)
 }
 
-public struct PayloadType: ExpressibleByIntegerLiteral, RawRepresentable, Equatable {
+public struct PayloadType: ExpressibleByIntegerLiteral, RawRepresentable, Equatable, Sendable {
 	public typealias IntegerLiteralType = UInt8
 
 	public static let marker: Self = 0b1000_0000
