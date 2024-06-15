@@ -17,7 +17,7 @@
 			XCTAssertEqual(conn.conn.state, .cancelled)
 			conn.conn.restart()
 			sleep(1)
-			XCTAssertEqual(conn.conn.state, .cancelled) // NWConnection instances cannot be restarted once cancelled
+			XCTAssertEqual(conn.conn.state, .cancelled)  // NWConnection instances cannot be restarted once cancelled
 		}
 	}
 

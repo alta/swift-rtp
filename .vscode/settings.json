@@ -1,19 +1,21 @@
 {
 	// Editor
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": "explicit"
 	},
 	"editor.detectIndentation": false,
 	"editor.formatOnSave": true,
 	"editor.insertSpaces": false,
-	"editor.tabSize": 8,
+	"editor.tabSize": 4,
 	"files.eol": "\n",
 	//
 	// Files
 	"files.exclude": {
 		"**/.build": true,
 		"**/.git": true,
+		// "Sources/Copus": true,
 	},
+	"files.associations": {},
 	"files.insertFinalNewline": true,
 	"files.watcherExclude": {
 		"**/.git/objects/**": true,
@@ -21,13 +23,30 @@
 	},
 	"files.trimTrailingWhitespace": true,
 	//
+	// HTML
+	"html.format.contentUnformatted": "pre,code,textarea,script",
+	"html.format.unformatted": "pre,code,textarea,script,wbr",
+	//
+	// JSON
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features",
+	},
+	//
+	// Make
+	"[makefile]": {
+		"editor.tabSize": 4
+	},
+	//
 	// Markdown
 	"[markdown]": {
 		"editor.rulers": [
 			80
 		],
 		"editor.codeActionsOnSave": {
-			"source.fixAll.markdownlint": true
+			"source.fixAll.markdownlint": "explicit"
 		}
 	},
 	"markdown.preview.breaks": true,
@@ -41,7 +60,7 @@
 	// Property Lists
 	"[plist]": {
 		"editor.formatOnSave": true,
-		"editor.tabSize": 8,
+		"editor.tabSize": 4,
 	},
 	//
 	// Shell
@@ -51,8 +70,9 @@
 	//
 	// Swift
 	"[swift]": {
+		"editor.detectIndentation": true,
 		"editor.insertSpaces": false,
-		"editor.tabSize": 8,
+		"editor.tabSize": 4,
 	},
 	//
 	// YAML
@@ -67,4 +87,15 @@
 			"strings": true
 		}
 	},
+	"[github-actions-workflow]": {
+		"editor.autoIndent": "keep",
+		"editor.detectIndentation": true,
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		}
+	}
 }
