@@ -23,7 +23,7 @@ jobs:
           submodules: recursive
 
       - name: Install swift-format
-        uses: Cyberbeni/install-swift-tool@v2
+        uses: Cyberbeni/install-swift-tool@v3
         with:
           url: https://github.com/apple/swift-format
 
